@@ -5,36 +5,39 @@
     End Sub
 
     Private Sub ButtonOK_Click(sender As Object, e As EventArgs) Handles ButtonOK.Click
-        Dim balance As Integer = CInt(TextBalance.Text)
-        If Integer.TryParse(TextWithdraw.Text, 0) = False Then
-            MessageBox.Show("กรุณากรอกจำนวนเงินที่จะถอนเป็นตัวเลข" & vbNewLine & "Ex. 0-999")
-            TextWithdraw.Text = ""
-            LabelResult.Text = ""
-            Exit Sub
-        End If
-        Dim WD As New Withdrawal(CInt(TextWithdraw.Text))
-        Dim withdraw As Integer = CInt(TextWithdraw.Text)
-        Dim message As String = ""
+        Try
+            Dim balance As Double = CDbl(TextBalance.Text)
+            If Double.TryParse(TextWithdraw.Text, 0) = False Then
+                MessageBox.Show("กรุณากรอกจำนวนเงินที่จะถอนเป็นตัวเลข" & vbNewLine & "Ex. 0-999", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                TextWithdraw.Text = ""
+                LabelResult.Text = ""
+                Exit Sub
+            End If
+            Dim WD As New Withdrawal(CDbl(TextWithdraw.Text))
+            Dim withdraw As Double = CDbl(TextWithdraw.Text)
+            Dim message As String = ""
 
 
-        If withdraw > balance Then
-            MessageBox.Show("ยอดเงินคงเหลือไม่พอ")
-            TextWithdraw.Text = ""
-            LabelResult.Text = ""
-        ElseIf withdraw > 20000 Then
-            MessageBox.Show("ถอนได้ไม่เกิน 20,000 บาท")
-            TextWithdraw.Text = ""
-            LabelResult.Text = ""
-        ElseIf withdraw < 100 Then
-            MessageBox.Show("ยอดขั้นต่ำต้องเป็นหลักร้อยเท่านั้น")
-            TextWithdraw.Text = ""
-            LabelResult.Text = ""
-        Else
-            LabelResult.Text = "1000 : " & WD.Foundcash1000 & vbNewLine &
-                               "500  : " & WD.Foundcash500 & vbNewLine &
-                               "100  : " & WD.Foundcash100
-        End If
-
+            If withdraw > balance Then
+                MessageBox.Show("ยอดเงินคงเหลือไม่พอ", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                TextWithdraw.Text = ""
+                LabelResult.Text = ""
+            ElseIf withdraw > 20000 Then
+                MessageBox.Show("ถอนได้ไม่เกิน 20,000 บาท", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                TextWithdraw.Text = ""
+                LabelResult.Text = ""
+            ElseIf withdraw < 100 Then
+                MessageBox.Show("ยอดขั้นต่ำต้องเป็นหลักร้อยเท่านั้น", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                TextWithdraw.Text = ""
+                LabelResult.Text = ""
+            Else
+                LabelResult.Text = "1000 : " & WD.Foundcash1000 & vbNewLine &
+                                   "500  : " & WD.Foundcash500 & vbNewLine &
+                                   "100  : " & WD.Foundcash100
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error with : " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
 
