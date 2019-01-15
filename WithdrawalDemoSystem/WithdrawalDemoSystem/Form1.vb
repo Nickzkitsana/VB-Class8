@@ -30,6 +30,10 @@
                 MessageBox.Show("ยอดขั้นต่ำต้องเป็นหลักร้อยเท่านั้น", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 TextWithdraw.Text = ""
                 LabelResult.Text = ""
+            ElseIf WD.Foundcash100under Mod 100 Then
+                MessageBox.Show("ไม่สามารถถอนเศษต้ำกว่า 100 ได้", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                TextWithdraw.Text = ""
+                LabelResult.Text = ""
             Else
                 LabelResult.Text = "1000 : " & WD.Foundcash1000 & vbNewLine &
                                    "500  : " & WD.Foundcash500 & vbNewLine &

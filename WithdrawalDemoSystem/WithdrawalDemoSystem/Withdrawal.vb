@@ -16,4 +16,8 @@
         Return ((_Withdraw Mod 1000) Mod 500) \ 100
     End Function
 
+    Public Function Foundcash100under() As Double
+        Return ((_Withdraw Mod 1000) Mod 500) Mod 100
+    End Function
+
 End Class
