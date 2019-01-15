@@ -38,6 +38,7 @@
                 LabelResult.Text = "1000 : " & WD.Foundcash1000 & vbNewLine &
                                    "500  : " & WD.Foundcash500 & vbNewLine &
                                    "100  : " & WD.Foundcash100
+                TextBalance.Text = balance - withdraw
             End If
         Catch ex As Exception
             MessageBox.Show("Error with : " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
